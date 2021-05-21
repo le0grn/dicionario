@@ -1,15 +1,17 @@
+import { Typography } from "@material-ui/core";
+
 const Word = ({w}) => {
     return (
         <div className="word">
-            <h2>Palavra: {w.word}</h2>
+            <Typography variant="h3">Palavra: {w.word}</Typography>
             <br/>
-            <h2>Significados:</h2>
+            <Typography variant="h4">Significados:</Typography>
             <br/>
             {w.meanings.map(meaning =>(
                 <div>
-                    <h3>Função: {meaning.partOfSpeech}</h3>
-                    <h3>Definição: {meaning.definitions[0].definition}</h3>
-                    <h3>Exemplo: {meaning.definitions[0].example}</h3>
+                    <Typography variant="h5">Função: {meaning.partOfSpeech}</Typography>
+                    <Typography variant="h5">Definição: {meaning.definitions[0].definition}</Typography>
+                    <Typography variant="h5">Exemplo: {meaning.definitions[0].example}</Typography>
                     <br/>
                 </div>
             ))}

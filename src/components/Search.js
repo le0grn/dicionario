@@ -1,4 +1,21 @@
+import { Button, FormControl, InputLabel, makeStyles, MenuItem, Select, TextField } from '@material-ui/core';
 import { useState } from 'react'
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        '& > *': {
+            margin: theme.spacing(1),
+            width: '25ch',
+          },
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+    },
+    margin: {
+        margin: theme.spacing(2),
+    },
+}));
 
 const Search = (props) => {
     const [searchValue, setSearchValue] = useState("");
@@ -22,30 +39,44 @@ const Search = (props) => {
         resetInputField();
     }
 
+    const classes = useStyles();
+
     return (
-        <form className="search">
-            <select
-            onChange={handleLanguageChanges}>
-              <option value="en_US">Inglês (Americano)</option>
-              <option value="hi">Indu</option>
-              <option value="es">Espanhol</option>
-              <option value="fr">Francês</option>
-              <option value="ja">Japonês</option>
-              <option value="ru">Russo</option>
-              <option value="en_GB">Inglês (Britânico)</option>
-              <option value="de">Alemão</option>
-              <option value="it">Italiano</option>
-              <option value="ko">Coreano</option>
-              <option value="pt-BR">Português Brasileiro</option>
-              <option value="ar">Arábico</option>
-              <option value="tr">Turco</option>
-            </select>
-            <input
+        <form className={classes.root}>
+            <FormControl className={classes.formControl}>
+                <InputLabel shrink id="idioma-select-label">
+                    Idioma
+                </InputLabel>
+                <Select
+                    labelId="idioma-select-label"
+                    id="idioma-select"
+                    value={language}
+                    onChange={handleLanguageChanges}
+                >
+                    <MenuItem value="en_US">Inglês (Americano)</MenuItem>
+                    <MenuItem value="hi">Hindi</MenuItem>
+                    <MenuItem value="es">Espanhol</MenuItem>
+                    <MenuItem value="fr">Francês</MenuItem>
+                    <MenuItem value="ja">Japonês</MenuItem>
+                    <MenuItem value="ru">Russo</MenuItem>
+                    <MenuItem value="en_GB">Inglês (Britânico)</MenuItem>
+                    <MenuItem value="de">Alemão</MenuItem>
+                    <MenuItem value="it">Italiano</MenuItem>
+                    <MenuItem value="ko">Coreano</MenuItem>
+                    <MenuItem value="pt-BR">Português Brasileiro</MenuItem>
+                    <MenuItem value="ar">Árabe</MenuItem>
+                    <MenuItem value="tr">Turco</MenuItem>
+                </Select>
+            </FormControl>
+            <TextField
+                id="standard-basic"
+                label="Digite a palavra"
                 value={searchValue}
                 onChange={handleSearchInputChanges}
-                type="text"
             />
-            <input onClick={callSearchFunction} type="submit" value="PESQUISA"/>
+            <Button className={classes.margin} variant="contained" color="primary" onClick={callSearchFunction} type="submit">
+                Pesquisar
+            </Button>
         </form>
     )
 }

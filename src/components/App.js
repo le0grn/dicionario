@@ -2,7 +2,18 @@ import { useEffect, useState } from 'react';
 import Header from './Header.js';
 import Search from './Search.js';
 import Word from './Word.js';
-import './App.css';
+import { Container, createMuiTheme, ThemeProvider } from '@material-ui/core';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#b39ddb',
+    },
+    secondary: {
+      main: '#b39ddb',
+    },
+  },
+});
 
 const DICTIONARY_API_URL = "https://api.dictionaryapi.dev/api/v2/entries/en_US/hello";
 
@@ -43,22 +54,23 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Header text="Dicionário" />
-      <Search search={search} />
-      <p className="App-intro">Dicionário com a API dictionary</p>
-      <div className="words">
-        {!isLoaded && !error ? (
-          <span>Carregando...</span>
-        ) : error? (
-          <div className="errorMessage">{error.message}</div>
-        ) : (
-          items.map(item => (
-            <Word w={item} />
-          ))
-        )}
-      </div>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Container>
+        <Header text="Dicionário" />
+        <Search search={search} />
+        <div className="words">
+          {!isLoaded && !error ? (
+            <span>Carregando...</span>
+          ) : error? (
+            <div className="errorMessage">{error.message}</div>
+          ) : (
+            items.map(item => (
+              <Word w={item} />
+            ))
+          )}
+        </div>
+      </Container>
+    </ThemeProvider>
   );
 }
 
